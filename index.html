@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Une petite question ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.85),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #ffe7ec,
+      #fff7f2
+    );
+
+  color: #30242a;
+  overflow: hidden;
+}
+
+/* Carte principale */
+
+.card {
+  width: min(92vw, 520px);
+  padding: 42px 28px 34px;
+
+  text-align: center;
+
+  background: rgba(255,255,255,.9);
+
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 28px;
+
+  box-shadow:
+    0 20px 60px rgba(70,35,45,.15);
+
+  backdrop-filter: blur(10px);
+}
+
+/* Cœur */
+
+.heart {
+  font-size: 48px;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+  }
+
+}
+
+/* Titres */
+
+h1 {
+  margin: 16px 0 10px;
+
+  font-size:
+    clamp(28px, 7vw, 42px);
+
+  line-height: 1.1;
+}
+
+.question {
+
+  font-size:
+    clamp(21px, 5vw, 28px);
+
+  font-weight: 650;
+
+  margin: 22px 0 8px;
+}
+
+.date {
+
+  margin: 0 0 28px;
+
+  color: #8b5a67;
+
+  font-weight: 600;
+}
+
+/* Petite phrase */
+
+.explanation {
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  color: #74646a;
+
+  margin: 0 auto 28px;
+
+  max-width: 390px;
+}
+
+/* Zone des boutons */
+
+.buttons {
+
+  position: relative;
+
+  height: 125px;
+
+  margin: 0 auto;
+
+  max-width: 390px;
+}
+
+/* Boutons */
+
+button {
+
+  border: 0;
+
+  border-radius: 999px;
+
+  padding: 15px 25px;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(60,30,40,.13);
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Oui */
+
+#yes {
+
+  background: #e95d78;
+
+  color: white;
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 20px;
+
+  transform: translateX(-115%);
+
+  transition: transform .15s;
+}
+
+#yes:hover {
+
+  transform:
+    translateX(-115%)
+    scale(1.05);
+}
+
+/* Non */
+
+#no {
+
+  background: #f0ecee;
+
+  color: #6c6065;
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 20px;
+
+  transform: translateX(15%);
+
+  transition:
+    left .18s ease,
+    top .18s ease,
+    transform .18s ease;
+}
+
+/* Texte qui change */
+
+#reaction {
+
+  height: 22px;
+
+  margin-top: 3px;
+
+  font-size: 13px;
+
+  color: #a55a6c;
+
+  font-style: italic;
+}
+
+/* Petits textes */
+
+.small {
+
+  margin-top: 18px;
+
+  font-size: 12px;
+
+  color: #a08f95;
+}
+
+.footer-note {
+
+  margin-top: 24px;
+
+  font-size: 11px;
+
+  color: #b0a3a8;
+}
+
+/* Écran après avoir cliqué sur Oui */
+
+.success {
+
+  display: none;
+}
+
+.success h2 {
+
+  font-size: 32px;
+
+  margin: 14px 0;
+}
+
+.success p {
+
+  font-size: 18px;
+
+  line-height: 1.55;
+}
+
+.calendar {
+
+  display: inline-block;
+
+  margin-top: 14px;
+
+  padding: 12px 18px;
+
+  border-radius: 14px;
+
+  background: #fff0f3;
+
+  color: #a33f58;
+
+  font-weight: 700;
+}
+</style>
+
+</head>
+
+<body>
+
+<main class="card">
+
+  <!-- QUESTION -->
+
+  <section id="questionView">
+
+    <div class="heart">
+      ❤️
+    </div>
+
+    <h1>
+      J'ai une petite question…
+    </h1>
+
+    <div class="question">
+      Ça te dit un date avec moi ?
+    </div>
+
+    <div class="date">
+      📅 Le 10 octobre 2026
+    </div>
+
+    <p class="explanation">
+
+      Une seule chose à savoir :
+      le bouton <strong>« Non ! »</strong>
+      est assez difficile à attraper… 😇
+
+    </p>
+
+    <div class="buttons" id="buttonArea">
+
+      <button id="yes">
+        Oui ❤️
+      </button>
+
+      <button id="no">
+        Non !
+      </button>
+
+    </div>
+
+    <div id="reaction"></div>
+
+    <div class="small">
+
+      PS : tu peux essayer de l'attraper…
+      mais je ne garantis rien 😇
+
+    </div>
+
+    <div class="footer-note">
+
+      Et si tu veux vraiment dire non,
+      tu peux évidemment fermer cette page 😉
+
+    </div>
+
+  </section>
+
+
+  <!-- APRÈS OUI -->
+
+  <section
+    class="success"
+    id="successView"
+  >
+
+    <div class="heart">
+      🥰
+    </div>
+
+    <h2>
+      Excellent choix !
+    </h2>
+
+    <p>
+
+      Le rendez-vous est donc
+      officiellement accepté.<br>
+
+      Je m'occupe de la suite… 😉
+
+    </p>
+
+    <div class="calendar">
+
+      📅 10 octobre 2026
+
+    </div>
+
+    <div class="footer-note">
+
+      Promis, cette fois le bouton
+      « Non » ne sera pas nécessaire.
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+/* --------------------------------
+   Éléments de la page
+-------------------------------- */
+
+const noBtn =
+  document.getElementById("no");
+
+const area =
+  document.getElementById("buttonArea");
+
+const yesBtn =
+  document.getElementById("yes");
+
+const reaction =
+  document.getElementById("reaction");
+
+const questionView =
+  document.getElementById("questionView");
+
+const successView =
+  document.getElementById("successView");
+
+
+/* --------------------------------
+   Répliques du bouton NON
+-------------------------------- */
+
+const messages = [
+
+  "Non !",
+
+  "Non, merci 😌",
+
+  "Essaie encore 😏",
+
+  "Raté !",
+
+  "Pas si vite !",
+
+  "Tu ne m'auras pas 😭",
+
+  "Arrête de me poursuivre !",
+
+  "Je refuse de coopérer.",
+
+  "Pourquoi tu fais ça ? 😂",
+
+  "Bon… ça suffit maintenant.",
+
+  "Je crois que je vais déménager.",
+
+  "OK, tu es tenace.",
+
+  "😳",
+
+  "NON !",
+
+  "…bon, tu as gagné. 😅"
+
+];
+
+
+/* --------------------------------
+   Petites phrases
+-------------------------------- */
+
+const reactions = [
+
+  "Le bouton vient de s'enfuir.",
+
+  "Il semblerait qu'il ait peur de toi.",
+
+  "Il court vite, ce petit malin…",
+
+  "Encore raté 😇",
+
+  "Il commence à paniquer.",
+
+  "Je crois qu'il regrette sa décision.",
+
+  "Il demande l'asile politique.",
+
+  "Il n'a manifestement aucune envie de répondre.",
+
+  "Bon courage 😂"
+
+];
+
+
+let count = 0;
+
+
+/* --------------------------------
+   Faire fuir le bouton
+-------------------------------- */
+
+function moveNo() {
+
+  const areaRect =
+    area.getBoundingClientRect();
+
+  const btnRect =
+    noBtn.getBoundingClientRect();
+
+
+  const maxX =
+    Math.max(
+      0,
+      areaRect.width - btnRect.width
+    );
+
+
+  const maxY =
+    Math.max(
+      0,
+      areaRect.height - btnRect.height
+    );
+
+
+  const x =
+    Math.random() * maxX;
+
+
+  const y =
+    Math.random() * maxY;
+
+
+  noBtn.style.left =
+    x + "px";
+
+
+  noBtn.style.top =
+    y + "px";
+
+
+  noBtn.style.transform =
+    "none";
+
+
+  count++;
+
+
+  noBtn.textContent =
+    messages[
+      Math.min(
+        count,
+        messages.length - 1
+      )
+    ];
+
+
+  reaction.textContent =
+    reactions[
+      Math.min(
+        count - 1,
+        reactions.length - 1
+      )
+    ] || "";
+
+}
+
+
+/* --------------------------------
+   Ordinateur :
+   le bouton fuit à l'approche
+-------------------------------- */
+
+document.addEventListener(
+  "mousemove",
+  function(event) {
+
+    const r =
+      noBtn.getBoundingClientRect();
+
+
+    const cx =
+      r.left + r.width / 2;
+
+
+    const cy =
+      r.top + r.height / 2;
+
+
+    const distance =
+      Math.hypot(
+        event.clientX - cx,
+        event.clientY - cy
+      );
+
+
+    if (distance < 100) {
+
+      moveNo();
+
+    }
+
+  }
+);
+
+
+/* --------------------------------
+   Souris
+-------------------------------- */
+
+noBtn.addEventListener(
+  "mouseenter",
+  moveNo
+);
+
+
+/* --------------------------------
+   Clavier
+-------------------------------- */
+
+noBtn.addEventListener(
+  "focus",
+  moveNo
+);
+
+
+/* --------------------------------
+   Téléphone :
+   le bouton fuit au toucher
+-------------------------------- */
+
+noBtn.addEventListener(
+  "touchstart",
+  function(event) {
+
+    event.preventDefault();
+
+    moveNo();
+
+  },
+  {
+    passive: false
+  }
+);
+
+
+/* --------------------------------
+   Sécurité :
+   impossible de cliquer sur NON
+-------------------------------- */
+
+noBtn.addEventListener(
+  "click",
+  function(event) {
+
+    event.preventDefault();
+
+    moveNo();
+
+  }
+);
+
+
+/* --------------------------------
+   Bouton OUI
+-------------------------------- */
+
+yesBtn.addEventListener(
+  "click",
+  function() {
+
+    questionView.style.display =
+      "none";
+
+    successView.style.display =
+      "block";
+
+  }
+);
+
+</script>
+
+</body>
+</html>
